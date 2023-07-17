@@ -1,5 +1,14 @@
+ [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+ ![Code Coverage](https://img.shields.io/badge/coverage-83.0%25-green)
+
 # python_coverage_badge
 A package to create and maintain a package unit test coverage badge in python code README
+
+# Tasks
+
+- TODO Add link to better coverage package
+- TODO Update this README and simplify setup content below
+
 
 # Updating coverage badge 🦡
 To update the coverage badger of this README run:
