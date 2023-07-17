@@ -21,7 +21,7 @@ This script uses the [`coverage`](https://coverage.readthedocs.io/) python packa
 > Note must be ran from repository root as shown in above codeblock
 
 # Install `python_coverage_badge` 🦡
-Clone the repository with (onote this is for https based link, change to suit your setup):
+Clone the repository with (note this is for https based link, change to suit your setup):
 ```bash
 git clone https://github.com/JosephCrispell/timesheet.git
 ```
