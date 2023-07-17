@@ -8,6 +8,8 @@ A package to create and maintain a package unit test coverage badge in python co
 
 - TODO Add link to better coverage package
 - TODO Update this README and simplify setup content below
+- TODO Add workflow diagram
+- TODO Add doctree
 
 
 # Updating coverage badge 🦡
