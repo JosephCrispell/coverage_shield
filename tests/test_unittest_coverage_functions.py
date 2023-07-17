@@ -13,7 +13,7 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
         """Test replacing of pattern in file with string"""
 
         # Create temporary file
-        temporary_file_path = Path("outputs/test_README.md")
+        temporary_file_path = Path("test_README.md")
         file_lines = ["I", "am", "a", "really", "simple", "file", "\n"]
         with open(temporary_file_path, "w") as file:
             file.write("\n".join(file_lines))
