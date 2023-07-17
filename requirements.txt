@@ -5,3 +5,4 @@ io
 pandas
 re
 setuptools
+unittest
