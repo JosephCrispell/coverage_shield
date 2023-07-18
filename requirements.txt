@@ -1,0 +1,8 @@
+pre-commit
+pathlib
+subprocess
+io
+pandas
+re
+setuptools
+unittest
