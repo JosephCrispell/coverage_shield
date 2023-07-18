@@ -119,13 +119,18 @@ def make_coverage_badge_url(
     return badge_url
 
 
-def replace_string_in_file(file_path: Path, pattern_regex: str, replacement: str):
+def replace_regex_in_file(
+    file_path: Path, pattern_regex: str, replacement: str, add_to_file: bool = True
+):
     """Replace pattern in file with string
+
+    Note if pattern not present this will add string to first line by default
 
     Args:
         file_path (Path): path to file
         pattern_regex (str): pattern to find
         replacement (str): string to replace pattern when found
+        add_to_file (bool): if regex not present will add to top of file if True. Defaults to True
     """
 
     # Read in file contents
@@ -133,10 +138,16 @@ def replace_string_in_file(file_path: Path, pattern_regex: str, replacement: str
     with open(file_path) as file:
         file_lines = file.read().splitlines()
 
-    # Replace string in each line
-    file_lines = [re.sub(pattern_regex, replacement, line) for line in file_lines]
+    # Check if badge present
+    badge_present = any(bool(re.match(pattern_regex, line)) for line in file_lines)
+    if (badge_present == False) & add_to_file:
+        # If not add at top
+        file_lines.insert(0, replacement)
+
+    else:
+        # If it is, update
+        file_lines = [re.sub(pattern_regex, replacement, line) for line in file_lines]
 
     # Write file lines back to file
-    file_lines.append("\n")
     with open(file_path, "w") as file:
-        file.write("\n".join(file_lines))
+        file.write("\n".join(file_lines) + "\n")
