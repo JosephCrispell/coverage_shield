@@ -22,7 +22,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 - TODO Add number of tests badge
 
 # Updating coverage badge 🦡
-To update the coverage badger of this README run:
+To update the coverage badge of this README run:
 ```python
 python main.py
 ```
@@ -40,7 +40,8 @@ pip install -e .
 ```
 > Note the `-e` in above means the package will automatically update as you change the codebase.
 
-# `precommit` installation ✔
+# For Developers
+## `precommit` installation ✔
 
 Install python [`pre-commit`](https://pre-commit.com/) with:
 ```bash
@@ -52,7 +53,7 @@ Within repository folder run:
 pre-commit install
 ```
 
-# Running tests 🧪
+## Running tests 🧪
 [Unit tests](https://realpython.com/python-testing/) (using the [`unittest`](https://docs.python.org/3/library/unittest.html) package) are in `tests/` can be ran with.
 
 To run all tests together:
