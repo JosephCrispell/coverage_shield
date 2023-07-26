@@ -16,9 +16,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Update this README and simplify setup content below
-- TODO Add workflow diagram
-- TODO Add doctree
 - TODO Add number of tests badge
 
 # Updating coverage badge 🔃
@@ -41,6 +38,27 @@ pip install -e .
 > Note the `-e` in above means the package will automatically update as you change the codebase.
 
 # For Developers
+
+## Package structure
+Directory tree generated using [file-tree-generator](https://marketplace.visualstudio.com/items?itemName=Shinotatwu-DS.file-tree-generator) Visual Studio Code extension:
+
+```
+📦python_coverage_badge
+ ┣ 📂python_coverage_badge
+ ┃ ┣ 📜unittest_coverage_functions.py # functions to calculate coverage and update badge
+ ┃ ┗ 📜__init__.py
+ ┣ 📂tests
+ ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests
+ ┃ ┗ 📜__init__.py
+ ┣ 📜.gitignore
+ ┣ 📜.pre-commit-config.yaml # precommit workflow
+ ┣ 📜LICENSE
+ ┣ 📜main.py # script to run to update coverage badge
+ ┣ 📜README.md
+ ┣ 📜requirements.txt
+ ┗ 📜setup.py
+```
+
 ## `precommit` installation ✔
 
 Install python [`pre-commit`](https://pre-commit.com/) with:
