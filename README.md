@@ -21,14 +21,14 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 - TODO Add doctree
 - TODO Add number of tests badge
 
-# Updating coverage badge 🦡
+# Updating coverage badge 🔃
 To update the coverage badge of this README run:
 ```python
 python main.py
 ```
 > Note must be ran from repository root as shown in above codeblock
 
-# Install `python_coverage_badge` 🦡
+# Install `python_coverage_badge` 📦
 Clone the repository with (or similar):
 ```bash
 git clone https://github.com/JosephCrispell/timesheet.git
