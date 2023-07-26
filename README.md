@@ -61,7 +61,7 @@ To run all tests together:
 python -m unittest
 ```
 
-## Workflow
+## Workflow ➡
 I created the following simple diagram using [mermaid](https://mermaid.js.org/) to show how the code and outputs link together.
 
 ```mermaid
