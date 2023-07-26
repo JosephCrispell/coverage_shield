@@ -66,11 +66,11 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
 
 ```mermaid
   graph TD
-    coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> update_coverage_badge[main.py];
+    coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> main[main.py];
     coverage_functions .-> test_coverage[tests/test_unittest_coverage_functions.py];
-    update_coverage_badge --> readme[README.md];
+    main --> readme[README.md];
     subgraph "unittests"
         test_coverage[tests/test_unittest_coverage_functions.py];
     end
-    unittests .-> update_coverage_badge
+    unittests .-> main
 ```
