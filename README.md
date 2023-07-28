@@ -18,12 +18,17 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 - TODO Add number of tests badge
 
+# Installing `python_coverage_badge` 📦
+To install this package, follow these two steps:
+1. Clone the repository with (or something similar): `git clone https://github.com/JosephCrispell/python_coverage_badge.git`
+2. Navigate to the repository and install with: `pip install .`
+
 # Updating coverage badge 🔃
-To update the coverage badge of this README run:
-```python
-python main.py
+To update the coverage badge of your repo, run the following from within the **root** folder of your repository:
+```bash
+python -m python_coverage_badge
 ```
-> Note must be ran from repository root as shown in above codeblock
+
 
 # Install `python_coverage_badge` 📦
 Clone the repository with (or similar):
@@ -39,12 +44,16 @@ pip install -e .
 
 # For Developers
 
+## Installation for development
+As [above](#updating-coverage-badge-🔃) to install clone the repo but run `pip install -e .`. The `-e` flag means the package will automatically update as you change the codebase.
+
 ## Package structure
 Directory tree generated using [file-tree-generator](https://marketplace.visualstudio.com/items?itemName=Shinotatwu-DS.file-tree-generator) Visual Studio Code extension:
 
 ```
 📦python_coverage_badge
  ┣ 📂python_coverage_badge
+ ┃ ┣ 📜__main__.py # script that is called when you call package (python -m python_coverage_badge)
  ┃ ┣ 📜unittest_coverage_functions.py # functions to calculate coverage and update badge
  ┃ ┗ 📜__init__.py
  ┣ 📂tests
@@ -53,7 +62,6 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
  ┣ 📜.gitignore
  ┣ 📜.pre-commit-config.yaml # precommit workflow
  ┣ 📜LICENSE
- ┣ 📜main.py # script to run to update coverage badge
  ┣ 📜README.md
  ┣ 📜requirements.txt
  ┗ 📜setup.py
@@ -84,7 +92,7 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
 
 ```mermaid
   graph TD
-    coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> main[main.py];
+    coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> main[python_coverage_badge/__main__.py];
     coverage_functions .-> test_coverage[tests/test_unittest_coverage_functions.py];
     main --> readme[README.md];
     subgraph "unittests"
