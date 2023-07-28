@@ -8,9 +8,7 @@ from python_coverage_badge import (
 
 # TODO update to change badge when unittests fail - red "failing" instead of value?
 # TODO add more colour categories to scale
-# TODO move code from ../main.py to here and get working
-# TODO check working directory and whether depends on where package called
-# TODO update README
+# TODO add command line interface
 
 
 def main():
