@@ -9,7 +9,7 @@ from python_coverage_badge import (
 
 
 class TestUnittestCoverageFunctions(unittest.TestCase):
-    def test_replace_string_in_file(self):
+    def test_replace_regex_in_file(self):
         """Test replacing of pattern in file with string"""
 
         # Create temporary file
@@ -19,7 +19,7 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
             file.write("\n".join(file_lines))
 
         # Replace string in temporary file
-        unittest_coverage_functions.replace_string_in_file(
+        unittest_coverage_functions.replace_regex_in_file(
             file_path=temporary_file_path, pattern_regex=r"s.m.+e", replacement="great"
         )
 

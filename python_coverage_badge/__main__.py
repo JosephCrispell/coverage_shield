@@ -6,10 +6,9 @@ from python_coverage_badge import (
     unittest_coverage_functions,
 )  # functions for running coverage
 
-# TODO setup so don't need to have badge already in README
 # TODO update to change badge when unittests fail - red "failing" instead of value?
 # TODO add more colour categories to scale
-# TODO fix failing "Fix End of Files" pre-commit hook
+# TODO add command line interface
 
 
 def main():
@@ -23,7 +22,7 @@ def main():
     )
 
     # Update badge in README
-    unittest_coverage_functions.replace_string_in_file(
+    unittest_coverage_functions.replace_regex_in_file(
         file_path=Path("README.md"),
         pattern_regex=r"\!\[Code Coverage\]\(.+\)",
         replacement=f"![Code Coverage]({coverage_badge_url})",
