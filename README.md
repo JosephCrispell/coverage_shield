@@ -16,7 +16,8 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add number of tests badge
+- TODO Add command line interface
+- TODO Add error checking for when tests fail
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
