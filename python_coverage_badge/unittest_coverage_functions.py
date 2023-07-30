@@ -64,9 +64,9 @@ def run_code_coverage() -> pd.DataFrame:
     try:
         coverage_report = subprocess.check_output(report_command, text=True)
 
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError as error:
         print(
-            f"Generating coverage report command ({' '.join(report_command)}) failed! Return code: {e.returncode}"
+            f"Generating coverage report command ({' '.join(report_command)}) failed! Return code: {error.returncode}"
         )
 
     # Convert coverage report output to dataframe
