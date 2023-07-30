@@ -6,6 +6,8 @@ import pandas as pd  # working with dataframes
 from pathlib import Path  # handling file paths
 import re  # working with regular expressions
 
+# TODO update to change badge when unittests fail - red "failing" instead of value?
+
 
 def parse_coverage_report(coverage_report_byte_string: bytes) -> pd.DataFrame:
     """Parses byte string returned by coverage report into pandas dataframe
@@ -33,12 +35,29 @@ def parse_coverage_report(coverage_report_byte_string: bytes) -> pd.DataFrame:
 def run_code_coverage() -> pd.DataFrame:
     """Runs coverage tool in command line and returns report
 
+    Raises:
+        Exception: if running coverage tool fails
+
     Returns:
         pd.DataFrame: coverage report as dataframe
     """
 
     # Run code coverage calculation
-    subprocess.run(["python3", "-m", "coverage", "run", "--source=.", "-m", "unittest"])
+    # Using .call() instead of .run() so we can check runs ok: https://www.datacamp.com/tutorial/python-subprocess
+    coverage_command = [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--source=.",
+        "-m",
+        "unittest",
+    ]
+    return_code = subprocess.call(coverage_command)
+    if return_code != 0:
+        raise Exception(
+            f"Running coverage package ({' '.join(coverage_command)}) failed! Return code: {return_code}"
+        )
 
     # Generate the report
     coverage_report = subprocess.check_output(["python3", "-m", "coverage", "report"])
