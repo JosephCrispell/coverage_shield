@@ -1,7 +1,7 @@
 # Load required libraries
 import subprocess  # command line commands
 import coverage  # not used directly but run in command line
-from io import BytesIO  # reading byte string (returned by coverage)
+from io import StringIO  # reading byte string (returned by coverage)
 import pandas as pd  # working with dataframes
 from pathlib import Path  # handling file paths
 import re  # working with regular expressions
@@ -9,18 +9,18 @@ import re  # working with regular expressions
 # TODO update to change badge when unittests fail - red "failing" instead of value?
 
 
-def parse_coverage_report(coverage_report_byte_string: bytes) -> pd.DataFrame:
+def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
     """Parses byte string returned by coverage report into pandas dataframe
 
     Args:
-        coverage_report_byte_string (bytes): byte string version of coverage report
+        coverage_report_string (bytes): string version of coverage report
 
     Returns:
         pd.DataFrame: coverage report as dataframe
     """
 
     # Convert the byte string into pandas dataframe
-    coverage_dataframe = pd.read_csv(BytesIO(coverage_report_byte_string), sep="\s+")
+    coverage_dataframe = pd.read_csv(StringIO(coverage_report_string), sep="\s+")
 
     # Remove empty rows
     coverage_dataframe = coverage_dataframe[1:-2]
@@ -60,7 +60,9 @@ def run_code_coverage() -> pd.DataFrame:
         )
 
     # Generate the report
-    coverage_report = subprocess.check_output(["python3", "-m", "coverage", "report"])
+    coverage_report = subprocess.check_output(
+        ["python3", "-m", "coverage", "report"], text=True
+    )
 
     # Convert coverage report output to dataframe
     report_dataframe = parse_coverage_report(coverage_report)
