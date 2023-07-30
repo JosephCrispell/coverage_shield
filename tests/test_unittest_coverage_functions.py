@@ -41,13 +41,12 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
     def test_parse_coverage_report(self):
         """Test parse of coverage byte string into coverage report"""
 
-        # Create dummy coverage report data in byte string
-        byte_string = "Name                                        Stmts   Miss  Cover\n---------------------------------------------------------------\nsetup.py                                        3      3     0%\ntests/__init__.py                               1      0   100%\ntests/test_data_functions.py                   19      1    95%\ntests/test_timesheet.py                        46      1    98%\ntests/test_unittest_coverage_functions.py      13      1    92%\ntimesheet/__init__.py                           2      0   100%\ntimesheet/data_functions.py                    32      2    94%\ntimesheet/timesheet.py                         53      1    98%\ntimesheet/unittest_coverage_functions.py       41     23    44%\nupdate_test_coverage_badge.py                   8      8     0%\n---------------------------------------------------------------\nTOTAL                                         218     40    82%\n"
-        byte_string = bytes(byte_string, "utf-8")
+        # Create dummy coverage report data in string
+        report_string = "Name                                        Stmts   Miss  Cover\n---------------------------------------------------------------\nsetup.py                                        3      3     0%\ntests/__init__.py                               1      0   100%\ntests/test_data_functions.py                   19      1    95%\ntests/test_timesheet.py                        46      1    98%\ntests/test_unittest_coverage_functions.py      13      1    92%\ntimesheet/__init__.py                           2      0   100%\ntimesheet/data_functions.py                    32      2    94%\ntimesheet/timesheet.py                         53      1    98%\ntimesheet/unittest_coverage_functions.py       41     23    44%\nupdate_test_coverage_badge.py                   8      8     0%\n---------------------------------------------------------------\nTOTAL                                         218     40    82%\n"
 
         # Parse the report byte string
         coverage_dataframe = unittest_coverage_functions.parse_coverage_report(
-            byte_string
+            report_string
         )
 
         # Check dataframe returned
@@ -89,13 +88,12 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
     def test_make_coverage_badge_url(self):
         """Test that shields io coverage badge url created correctly"""
 
-        # Create dummy coverage report data in byte string
-        byte_string = "Name                                        Stmts   Miss  Cover\n---------------------------------------------------------------\nsetup.py                                        3      3     0%\ntests/__init__.py                               1      0   100%\ntests/test_data_functions.py                   19      1    95%\ntests/test_timesheet.py                        46      1    98%\ntests/test_unittest_coverage_functions.py      13      1    92%\ntimesheet/__init__.py                           2      0   100%\ntimesheet/data_functions.py                    32      2    94%\ntimesheet/timesheet.py                         53      1    98%\ntimesheet/unittest_coverage_functions.py       41     23    44%\nupdate_test_coverage_badge.py                   8      8     0%\n---------------------------------------------------------------\nTOTAL                                         218     40    82%\n"
-        byte_string = bytes(byte_string, "utf-8")
+        # Create dummy coverage report data in string
+        report_string = "Name                                        Stmts   Miss  Cover\n---------------------------------------------------------------\nsetup.py                                        3      3     0%\ntests/__init__.py                               1      0   100%\ntests/test_data_functions.py                   19      1    95%\ntests/test_timesheet.py                        46      1    98%\ntests/test_unittest_coverage_functions.py      13      1    92%\ntimesheet/__init__.py                           2      0   100%\ntimesheet/data_functions.py                    32      2    94%\ntimesheet/timesheet.py                         53      1    98%\ntimesheet/unittest_coverage_functions.py       41     23    44%\nupdate_test_coverage_badge.py                   8      8     0%\n---------------------------------------------------------------\nTOTAL                                         218     40    82%\n"
 
         # Parse the report byte string
         coverage_dataframe = unittest_coverage_functions.parse_coverage_report(
-            byte_string
+            report_string
         )
 
         # Create badge url
