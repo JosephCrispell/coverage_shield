@@ -6,7 +6,6 @@ from python_coverage_badge import (
     unittest_coverage_functions,
 )  # functions for running coverage
 
-# TODO update to change badge when unittests fail - red "failing" instead of value?
 # TODO add more colour categories to scale
 # TODO add command line interface
 
