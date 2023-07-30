@@ -55,14 +55,19 @@ def run_code_coverage() -> pd.DataFrame:
     ]
     return_code = subprocess.call(coverage_command)
     if return_code != 0:
-        raise Exception(
-            f"Running coverage package ({' '.join(coverage_command)}) failed! Return code: {return_code}"
+        raise subprocess.CalledProcessError(
+            f"Running coverage package command ({' '.join(coverage_command)}) failed! Return code: {return_code}"
         )
 
     # Generate the report
-    coverage_report = subprocess.check_output(
-        ["python3", "-m", "coverage", "report"], text=True
-    )
+    report_command = ["python3", "-m", "coverage", "report"]
+    try:
+        coverage_report = subprocess.check_output(report_command, text=True)
+
+    except subprocess.CalledProcessError as e:
+        print(
+            f"Generating coverage report command ({' '.join(report_command)}) failed! Return code: {e.returncode}"
+        )
 
     # Convert coverage report output to dataframe
     report_dataframe = parse_coverage_report(coverage_report)
