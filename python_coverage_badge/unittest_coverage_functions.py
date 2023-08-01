@@ -1,24 +1,25 @@
 # Load required libraries
 import subprocess  # command line commands
 import coverage  # not used directly but run in command line
-from io import BytesIO  # reading byte string (returned by coverage)
+from io import StringIO  # reading byte string (returned by coverage)
 import pandas as pd  # working with dataframes
 from pathlib import Path  # handling file paths
 import re  # working with regular expressions
+import warnings  # send warnings
 
 
-def parse_coverage_report(coverage_report_byte_string: bytes) -> pd.DataFrame:
+def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
     """Parses byte string returned by coverage report into pandas dataframe
 
     Args:
-        coverage_report_byte_string (bytes): byte string version of coverage report
+        coverage_report_string (bytes): string version of coverage report
 
     Returns:
         pd.DataFrame: coverage report as dataframe
     """
 
     # Convert the byte string into pandas dataframe
-    coverage_dataframe = pd.read_csv(BytesIO(coverage_report_byte_string), sep="\s+")
+    coverage_dataframe = pd.read_csv(StringIO(coverage_report_string), sep="\s+")
 
     # Remove empty rows
     coverage_dataframe = coverage_dataframe[1:-2]
@@ -33,18 +34,52 @@ def parse_coverage_report(coverage_report_byte_string: bytes) -> pd.DataFrame:
 def run_code_coverage() -> pd.DataFrame:
     """Runs coverage tool in command line and returns report
 
+    Will send warning if running coverage package is failing and return empty dataframe
+
     Returns:
-        pd.DataFrame: coverage report as dataframe
+        pd.DataFrame : coverage report as dataframe if coverage passing; empty dataframe if coverage failing
     """
 
     # Run code coverage calculation
-    subprocess.run(["python3", "-m", "coverage", "run", "--source=.", "-m", "unittest"])
+    # Check out useful subprocess function docs: https://www.datacamp.com/tutorial/python-subprocess
+    coverage_command = [
+        "python3",
+        "-m",
+        "coverage",
+        "run",
+        "--source=.",
+        "-m",
+        "unittest",
+    ]
+    command_result = subprocess.run(coverage_command, capture_output=True, text=True)
 
-    # Generate the report
-    coverage_report = subprocess.check_output(["python3", "-m", "coverage", "report"])
+    # Check the result
+    if command_result.returncode == 0:  # Passing
 
-    # Convert coverage report output to dataframe
-    report_dataframe = parse_coverage_report(coverage_report)
+        # Show result from command
+        # - For some reason unit testing progress sent to standard error
+        # - Any prints from unit tests sent to standard output so ignoring these for the moment
+        print(command_result.stderr)
+
+        # Generate the report
+        report_command = ["python3", "-m", "coverage", "report"]
+        try:
+            coverage_report = subprocess.check_output(report_command, text=True)
+
+        except subprocess.CalledProcessError as error:
+            print(
+                f"Generating coverage report command ({' '.join(report_command)}) failed! Return code: {error.returncode}"
+            )
+
+        # Convert coverage report output to dataframe
+        report_dataframe = parse_coverage_report(coverage_report)
+
+    else:
+        warnings.warn(
+            f"Running coverage package command ({' '.join(coverage_command)}) failed! Return code: {command_result.returncode}. \nError Output:\n{command_result.stderr}"
+        )
+
+        report_dataframe = pd.DataFrame()
 
     return report_dataframe
 
@@ -83,38 +118,48 @@ def get_badge_colour(
 
 
 def make_coverage_badge_url(
-    coverage_dataframe: pd.DataFrame,
+    coverage_dataframe: pd.DataFrame | str,
     poor_max_threshold: float = 25,
     medium_max_threshold: float = 75,
+    failing_colour: str = "red",
 ) -> str:
     """Uses shields io to build coverage badge
 
     Args:
-        coverage_dataframe (pd.DataFrame): coverage report as dataframe
+        coverage_dataframe (pd.DataFrame | str): coverage report as dataframe. If coverage failed this will be string ("failing")
         poor_max_threshold (float, optional): threshold below which badge colour is red. Defaults to 25.
         medium_max_threshold (float, optional): threshold below which badge colour is orange. Defaults to 75.
+        failing_colour (str, optional): colour of badge when failing. Defaults to "red".
 
     Returns:
         str: _description_
     """
 
-    # Calculate the average code coverage
-    total_statements = sum(coverage_dataframe.Stmts)
-    total_statements_missed = sum(coverage_dataframe.Miss)
-    average_coverage = (total_statements - total_statements_missed) / total_statements
+    # Check if coverage report available
+    if not coverage_dataframe.empty:
 
-    # Convert to percentage and round
-    average_coverage = round(average_coverage * 100, 1)
+        # Calculate the average code coverage
+        total_statements = sum(coverage_dataframe.Stmts)
+        total_statements_missed = sum(coverage_dataframe.Miss)
+        average_coverage = (
+            total_statements - total_statements_missed
+        ) / total_statements
 
-    # Note badger colour
-    badge_colour = get_badge_colour(
-        average_coverage, poor_max_threshold, medium_max_threshold
-    )
+        # Convert to percentage and round
+        average_coverage = round(average_coverage * 100, 1)
 
-    # Build badge
-    badge_url = (
-        f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}"
-    )
+        # Note badger colour
+        badge_colour = get_badge_colour(
+            average_coverage, poor_max_threshold, medium_max_threshold
+        )
+
+        # Build badge
+        badge_url = f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}"
+
+    else:
+
+        # Build badge
+        badge_url = f"https://img.shields.io/badge/coverage-failing-{failing_colour}"
 
     return badge_url
 
