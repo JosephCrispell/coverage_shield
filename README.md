@@ -16,7 +16,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add command line interface
+- TODO Add command line interface instructions here
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
