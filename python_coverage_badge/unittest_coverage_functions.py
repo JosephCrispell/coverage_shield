@@ -31,7 +31,7 @@ def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
     return coverage_dataframe
 
 
-def run_code_coverage() -> pd.DataFrame:
+def run_code_coverage(directory: Path = Path(".")) -> pd.DataFrame:
     """Runs coverage tool in command line and returns report
 
     Will send warning if running coverage package is failing and return empty dataframe
@@ -47,7 +47,7 @@ def run_code_coverage() -> pd.DataFrame:
         "-m",
         "coverage",
         "run",
-        "--source=.",
+        "--source=" + str(directory),
         "-m",
         "unittest",
     ]
