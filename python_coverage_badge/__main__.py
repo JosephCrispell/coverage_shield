@@ -4,7 +4,6 @@ from python_coverage_badge import (
 )  # functions for running coverage
 
 # TODO add more colour categories to scale
-# TODO add command line interface
 # TODO add unittest for main
 # TODO add unittests for cli
 
