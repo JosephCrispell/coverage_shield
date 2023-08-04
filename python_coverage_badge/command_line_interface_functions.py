@@ -5,7 +5,7 @@ from datetime import datetime  # working with dates and times
 import sys  # accessing command line arguments
 
 # Local imports
-import python_coverage_badge
+from python_coverage_badge import unittest_coverage_functions
 
 
 def build_command_line_interface() -> argparse.ArgumentParser:
@@ -46,21 +46,42 @@ def build_command_line_interface() -> argparse.ArgumentParser:
         "--readme",
         nargs="?",  # Accept 0 or 1 arguments
         default="README.md",  # Default value
-        metavar="directory",
+        metavar="readme_path",
         type=str,
         help="Provide path to README.md relative to directory provided.",
     )
-    parser.add_argument(
-        "-c",
-        "--coverage",
-        action="store_true",
-        help="Run the python coverage package the executes unit tests and generates coverage summary.",
-    )
-    parser.add_argument(
-        "-b",
-        "--badge",
-        action="store_true",
-        help="Update the coverage badge in README.md.",
-    )
 
     return parser
+
+
+def parse_command_line_arguments(
+    parser: argparse.ArgumentParser, arguments: list[str] = sys.argv[1:]
+):
+    """Parse command line arguments based on parser provided
+
+    Args:
+        parser (argparse.ArgumentParser): command line argument parser
+        arguments (list[str]): list of command line arguments passed to parser.parse_args(), which isn't
+            required normally but this means we can unittest
+            (see: https://stackoverflow.com/questions/18160078/how-do-you-write-tests-for-the-argparse-portion-of-a-python-module).
+            Defaults to sys.argv[:1] (arguments minus script name).
+
+    """
+
+    # Get arguments
+    args = parser.parse_args(arguments)
+
+    # Run coverage package (which runs unittests and generates report
+    coverage_dataframe = unittest_coverage_functions.run_code_coverage(args.directory)
+
+    # Build the badge url
+    coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
+        coverage_dataframe
+    )
+
+    # Update badge in README
+    unittest_coverage_functions.replace_regex_in_file(
+        file_path=Path(args.readme),
+        pattern_regex=r"\!\[Code Coverage\]\(.+\)",
+        replacement=f"![Code Coverage]({coverage_badge_url})",
+    )
