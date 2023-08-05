@@ -55,7 +55,9 @@ def build_command_line_interface() -> argparse.ArgumentParser:
 
 
 def parse_command_line_arguments(
-    parser: argparse.ArgumentParser, arguments: list[str] = sys.argv[1:]
+    parser: argparse.ArgumentParser,
+    arguments: list[str] = sys.argv[1:],
+    testing: bool = False,
 ):
     """Parse command line arguments based on parser provided
 
@@ -71,17 +73,25 @@ def parse_command_line_arguments(
     # Get arguments
     args = parser.parse_args(arguments)
 
-    # Run coverage package (which runs unittests and generates report
-    coverage_dataframe = unittest_coverage_functions.run_code_coverage(args.directory)
+    # Check if running unittests
+    if not testing:
 
-    # Build the badge url
-    coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
-        coverage_dataframe
-    )
+        # Run coverage package (which runs unittests and generates report
+        coverage_dataframe = unittest_coverage_functions.run_code_coverage(
+            args.directory
+        )
 
-    # Update badge in README
-    unittest_coverage_functions.replace_regex_in_file(
-        file_path=Path(args.readme),
-        pattern_regex=r"\!\[Code Coverage\]\(.+\)",
-        replacement=f"![Code Coverage]({coverage_badge_url})",
-    )
+        # Build the badge url
+        coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
+            coverage_dataframe
+        )
+
+        # Update badge in README
+        unittest_coverage_functions.replace_regex_in_file(
+            file_path=Path(args.directory, args.readme),
+            pattern_regex=r"\!\[Code Coverage\]\(.+\)",
+            replacement=f"![Code Coverage]({coverage_badge_url})",
+        )
+
+    else:
+        return args
