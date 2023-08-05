@@ -5,7 +5,6 @@ from python_coverage_badge import (
 
 # TODO add more colour categories to scale
 # TODO add unittest for main
-# TODO add unittests for cli
 
 
 def main():
