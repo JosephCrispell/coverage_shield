@@ -31,7 +31,7 @@ def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
     return coverage_dataframe
 
 
-def run_code_coverage(directory: Path = Path(".")) -> pd.DataFrame:
+def run_code_coverage() -> pd.DataFrame:
     """Runs coverage tool in command line and returns report
 
     Will send warning if running coverage package is failing and return empty dataframe
@@ -40,6 +40,8 @@ def run_code_coverage(directory: Path = Path(".")) -> pd.DataFrame:
         pd.DataFrame : coverage report as dataframe if coverage passing; empty dataframe if coverage failing
     """
 
+    # Change to the directory provided
+
     # Run code coverage calculation
     # Check out useful subprocess function docs: https://www.datacamp.com/tutorial/python-subprocess
     coverage_command = [
@@ -47,7 +49,7 @@ def run_code_coverage(directory: Path = Path(".")) -> pd.DataFrame:
         "-m",
         "coverage",
         "run",
-        "--source=" + str(directory),
+        "--source=.",
         "-m",
         "unittest",
     ]

@@ -3,6 +3,7 @@ import argparse  # parsing command line arguments
 from pathlib import Path  # handling file paths
 from datetime import datetime  # working with dates and times
 import sys  # accessing command line arguments
+import os  # Change directory
 
 # Local imports
 from python_coverage_badge import unittest_coverage_functions
@@ -67,6 +68,7 @@ def parse_command_line_arguments(
             required normally but this means we can unittest
             (see: https://stackoverflow.com/questions/18160078/how-do-you-write-tests-for-the-argparse-portion-of-a-python-module).
             Defaults to sys.argv[:1] (arguments minus script name).
+        testing (bool): check if running unit tests as don't want to run coverage package if we are. Defaults to False.
 
     """
 
@@ -76,10 +78,11 @@ def parse_command_line_arguments(
     # Check if running unittests
     if not testing:
 
+        # Set target directory
+        os.chdir(args.directory)
+
         # Run coverage package (which runs unittests and generates report
-        coverage_dataframe = unittest_coverage_functions.run_code_coverage(
-            args.directory
-        )
+        coverage_dataframe = unittest_coverage_functions.run_code_coverage()
 
         # Build the badge url
         coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
