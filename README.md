@@ -16,7 +16,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add command line interface instructions here
 - TODO Add option to stage, commit, and push README once badge updated?
 
 # Installing `python_coverage_badge` 📦
@@ -30,18 +29,19 @@ To update the coverage badge of your repo, run the following from within the **r
 python -m python_coverage_badge
 ```
 
-
-# Install `python_coverage_badge` 📦
-Clone the repository with (or similar):
-```bash
-git clone https://github.com/JosephCrispell/timesheet.git
+There are a couple of command line arguments you can use, take a look with `python -m python_coverage_badge`:
 ```
+usage: python_coverage_badge [-h] [-d [directory]] [-r [readme_path]]
 
-And install by running this in repository:
-```bash
-pip install -e .
+Welcome to python_coverage_badge! A tool to create and maintain a python package unit test coverage badge in README.md
+
+options:
+  -h, --help  show this help message and exit
+  -d [directory], --directory [directory]
+              Provide path to directory to run python_coverage_badge in. (default: .)
+  -r [readme_path], --readme [readme_path]
+              Provide path to README.md relative to directory provided. (default: README.md)
 ```
-> Note the `-e` in above means the package will automatically update as you change the codebase.
 
 # For Developers
 
