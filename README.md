@@ -17,6 +17,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 # Tasks
 
 - TODO Add option to stage, commit, and push README once badge updated?
+- TODO Update doctree
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
@@ -81,9 +82,7 @@ pre-commit install
 ```
 
 ## Running tests 🧪
-[Unit tests](https://realpython.com/python-testing/) (using the [`unittest`](https://docs.python.org/3/library/unittest.html) package) are in `tests/` can be ran with.
-
-To run all tests together:
+[Unit tests](https://realpython.com/python-testing/) (using the [`unittest`](https://docs.python.org/3/library/unittest.html) package) are in `tests/` can be ran all together with:
 ```bash
 python -m unittest
 ```
@@ -96,8 +95,11 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
     coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> main[python_coverage_badge/__main__.py];
     coverage_functions .-> test_coverage[tests/test_unittest_coverage_functions.py];
     main --> readme[README.md];
+    cli_functions[python_coverage_badge/command_line_interface_functions.py] .-> main;
+    cli_functions .-> test_cli[tests/test_command_line_interface_functions.py];
     subgraph "unittests"
-        test_coverage[tests/test_unittest_coverage_functions.py];
+        test_coverage;
+        test_cli;
     end
     unittests .-> main
 ```
