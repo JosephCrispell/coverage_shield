@@ -40,6 +40,8 @@ def run_code_coverage() -> pd.DataFrame:
         pd.DataFrame : coverage report as dataframe if coverage passing; empty dataframe if coverage failing
     """
 
+    # Change to the directory provided
+
     # Run code coverage calculation
     # Check out useful subprocess function docs: https://www.datacamp.com/tutorial/python-subprocess
     coverage_command = [

@@ -1,31 +1,19 @@
-# Load packages
-from pathlib import Path  # handling file paths
-
 # Local imports
 from python_coverage_badge import (
-    unittest_coverage_functions,
+    command_line_interface_functions,
 )  # functions for running coverage
 
 # TODO add more colour categories to scale
-# TODO add command line interface
+# TODO add unittest for main
 
 
 def main():
 
-    # Run code coverage
-    coverage_dataframe = unittest_coverage_functions.run_code_coverage()
+    # Build interface
+    parser = command_line_interface_functions.build_command_line_interface()
 
-    # Build badge
-    coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
-        coverage_dataframe
-    )
-
-    # Update badge in README
-    unittest_coverage_functions.replace_regex_in_file(
-        file_path=Path("README.md"),
-        pattern_regex=r"\!\[Code Coverage\]\(.+\)",
-        replacement=f"![Code Coverage]({coverage_badge_url})",
-    )
+    # Parse arguments
+    command_line_interface_functions.parse_command_line_arguments(parser)
 
 
 if __name__ == "__main__":
