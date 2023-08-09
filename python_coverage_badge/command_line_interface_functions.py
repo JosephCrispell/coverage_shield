@@ -7,6 +7,7 @@ import os  # Change directory
 
 # Local imports
 from python_coverage_badge import unittest_coverage_functions
+from python_coverage_badge import git_functions
 
 # TODO add git argument
 
@@ -17,8 +18,7 @@ def build_command_line_interface() -> argparse.ArgumentParser:
     Adds the following arguments:
     - Target directory: -d/--directory
     - Target README: -r/--readme
-    - Run coverage: -c/--coverage
-    - Update badge: -b/--badge
+    - Push changes: -g/--git_push
 
     Returns:
         argparse.ArgumentParser: argument parser
@@ -53,6 +53,12 @@ def build_command_line_interface() -> argparse.ArgumentParser:
         type=str,
         help="Provide path to README.md relative to directory provided.",
     )
+    parser.add_argument(
+        "-g",
+        "--git_push",
+        action="store_false",
+        help="Stage, commit, and push the updated README file (-r/--readme) using git.",
+    )
 
     return parser
 
@@ -71,7 +77,6 @@ def parse_command_line_arguments(
             (see: https://stackoverflow.com/questions/18160078/how-do-you-write-tests-for-the-argparse-portion-of-a-python-module).
             Defaults to sys.argv[:1] (arguments minus script name).
         testing (bool): check if running unit tests as don't want to run coverage package if we are. Defaults to False.
-
     """
 
     # Get arguments
@@ -97,6 +102,14 @@ def parse_command_line_arguments(
             pattern_regex=r"\!\[Code Coverage\]\(.+\)",
             replacement=f"![Code Coverage]({coverage_badge_url})",
         )
+
+        # Check if pushing changes
+        if args.git_push:
+
+            # Stage, commit, and push updated README
+            git_functions.push_updated_readme(
+                readme_path=Path(args.directory, args.readme)
+            )
 
     else:
         return args
