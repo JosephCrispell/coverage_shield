@@ -56,7 +56,7 @@ def build_command_line_interface() -> argparse.ArgumentParser:
     parser.add_argument(
         "-g",
         "--git_push",
-        action="store_false",
+        action="store_true",
         help="Stage, commit, and push the updated README file (-r/--readme) using git.",
     )
 
