@@ -20,27 +20,6 @@ def push_updated_readme(readme_path: Path = Path("README.md")):
     push_changes()
 
 
-def run_command_without_collecting_output(command: list[str]):
-    """Runs command in the command line (terminal)
-
-    Args:
-        command (list[str]): command to run
-
-    Raises:
-        subprocess.CalledProcessError: throws error if command fails
-    """
-
-    # Run the command
-    command_result = subprocess.run(command, capture_output=True, text=True)
-
-    # Check command ran ok
-    if command_result != 0:
-
-        raise subprocess.CalledProcessError(
-            f"Command provided ({' '.join(command)}) failed with code: {command_result.returncode}. Error message:\n\n{command_result.stderr}"
-        )
-
-
 def stage_file(file_path: Path):
     """Use git to stage file
 
@@ -49,32 +28,28 @@ def stage_file(file_path: Path):
     """
 
     # Build the command to stage file
-    staging_command = ["git", "add", repr(file_path)]
+    staging_command = ["git", "add", str(file_path)]
 
     # Run the command
-    run_command_without_collecting_output(staging_command)
+    subprocess.run(staging_command, check=True)
 
 
 def commit_changes(message: str):
     """Use git to commit changes made
 
-    Raises:
-        subprocess.CalledProcessError: throws error if command to commit changes fails
+    Args:
+        message (str): git commit message
     """
 
     # Build the command to commit changes
     commit_command = ["git", "commit", "-m", message]
 
     # Run the command
-    run_command_without_collecting_output(commit_command)
+    subprocess.run(commit_command, check=True)
 
 
-def push_changes(message: str):
-    """Use git to push committed changes
-
-    Raises:
-        subprocess.CalledProcessError: throws error if command to push committed changes fails
-    """
+def push_changes():
+    """Use git to push committed changes"""
 
     # Build the command to push changes
     push_command = [
@@ -83,4 +58,4 @@ def push_changes(message: str):
     ]
 
     # Run the command
-    run_command_without_collecting_output(push_command)
+    subprocess.run(push_command, check=True)
