@@ -8,6 +8,8 @@ import os  # Change directory
 # Local imports
 from python_coverage_badge import unittest_coverage_functions
 
+# TODO add git argument
+
 
 def build_command_line_interface() -> argparse.ArgumentParser:
     """Builds command line interface for python_coverage_badge package
