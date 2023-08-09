@@ -16,7 +16,8 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add option to stage, commit, and push README once badge updated?
+- TODO Add tests for git functions
+- TODO Add tests for main
 - TODO Update doctree
 
 # Installing `python_coverage_badge` 📦
