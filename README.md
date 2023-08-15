@@ -18,7 +18,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 - TODO Add tests for git functions
 - TODO Add tests for main
-- TODO Update doctree
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
@@ -57,10 +56,15 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
 📦python_coverage_badge
  ┣ 📂python_coverage_badge
  ┃ ┣ 📜__main__.py # script that is called when you call package (python -m python_coverage_badge)
+ ┃ ┣ 📜command_line_interface_functions.py # functions for the command line interface
+ ┃ ┣ 📜git_functions.py # functions to staging, committing, and pushing updated README to remote
  ┃ ┣ 📜unittest_coverage_functions.py # functions to calculate coverage and update badge
  ┃ ┗ 📜__init__.py
  ┣ 📂tests
- ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests
+ ┃ ┣ 📜test_command_line_interface_functions.py # unit tests for cli
+ ┃ ┣ 📜test_git_functions.py # unit tests for git functions
+ ┃ ┣ 📜test_main.py # unit tests for main script
+ ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests for functions to create/update coverage badge
  ┃ ┗ 📜__init__.py
  ┣ 📜.gitignore
  ┣ 📜.pre-commit-config.yaml # precommit workflow
@@ -96,11 +100,16 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
     coverage_functions[python_coverage_badge/unittest_coverage_functions.py] .-> main[python_coverage_badge/__main__.py];
     coverage_functions .-> test_coverage[tests/test_unittest_coverage_functions.py];
     main --> readme[README.md];
+    main .-> test_main[tests/test_main.py];
     cli_functions[python_coverage_badge/command_line_interface_functions.py] .-> main;
     cli_functions .-> test_cli[tests/test_command_line_interface_functions.py];
+    git_functions[python_coverage_badge/git_functions.py] .-> main;
+    git_functions .-> test_cli[tests/test_git_functions.py];
     subgraph "unittests"
         test_coverage;
         test_cli;
+        test_git_functions;
+        test_main;
     end
     unittests .-> main
 ```
