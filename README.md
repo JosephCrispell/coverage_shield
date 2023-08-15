@@ -104,11 +104,11 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
     cli_functions[python_coverage_badge/command_line_interface_functions.py] .-> main;
     cli_functions .-> test_cli[tests/test_command_line_interface_functions.py];
     git_functions[python_coverage_badge/git_functions.py] .-> main;
-    git_functions .-> test_cli[tests/test_git_functions.py];
+    git_functions .-> test_git[tests/test_git_functions.py];
     subgraph "unittests"
         test_coverage;
         test_cli;
-        test_git_functions;
+        test_git;
         test_main;
     end
     unittests .-> main
