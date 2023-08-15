@@ -111,5 +111,5 @@ I created the following simple diagram using [mermaid](https://mermaid.js.org/) 
         test_git;
         test_main;
     end
-    unittests .-> main
+    unittests .-> coverage_functions
 ```
