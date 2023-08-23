@@ -14,8 +14,20 @@ from python_coverage_badge import (
 class TestGitFunctions(unittest.TestCase):
     def test_check_if_file_changed_using_git(self):
 
-        # TODO Add test in here!
-        print("hello! Tests to add!")
+        # Create a temporary file
+        temporary_file_path = Path("test_git_file_changed.txt")
+        file_lines = ["I", "am", "a", "really", "simple", "file", "\n"]
+        with open(temporary_file_path, "w") as file:
+            file.write("\n".join(file_lines))
+
+        # Check whether file changed by git
+        self.assertTrue(
+            git_functions.check_if_file_changed_using_git(temporary_file_path),
+            "Check file changed recognised by git",
+        )
+
+        # Remove temporary file
+        Path.unlink(temporary_file_path)
 
 
 if __name__ == "__main__":
