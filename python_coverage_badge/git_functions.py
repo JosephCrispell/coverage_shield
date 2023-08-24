@@ -37,11 +37,14 @@ def check_if_file_changed_using_git(file_path: Path) -> bool:
     return True
 
 
-def push_updated_readme(readme_path: Path = Path("README.md")):
+def push_updated_readme(
+    readme_path: Path = Path("README.md"), commit_and_push: bool = True
+):
     """Uses git to stage, commit, and push changes to README.md (updated badge)
 
     Args:
         readme_path (Path, optional): path to README.md file. Defaults to Path("README.md").
+        commit_and_push (bool, optional): whether to push changes or not. Defaults to True.
     """
 
     # Check if updated README changed
@@ -50,11 +53,14 @@ def push_updated_readme(readme_path: Path = Path("README.md")):
         # Stage the changes (updated badge)
         stage_file(readme_path)
 
-        # Commit changes
-        commit_changes(message=f"Updated coverage badge in {readme_path}")
+        # Check if committing and pushing
+        if commit_and_push:
 
-        # Push changes
-        push_changes()
+            # Commit changes
+            commit_changes(message=f"Updated coverage badge in {readme_path}")
+
+            # Push changes
+            push_changes()
 
 
 def stage_file(file_path: Path):
