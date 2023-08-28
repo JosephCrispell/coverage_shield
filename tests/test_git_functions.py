@@ -44,8 +44,8 @@ class TestGitFunctions(unittest.TestCase):
         )
 
         # Check whether file changed by git
-        command_result = subprocess.run(
-            ["git", "status"], capture_output=True, text=True
+        command_result = git_functions.send_command(
+            "git", "status", capture_output=True, text=True
         )
 
         # Check if there is anything to commit
@@ -55,11 +55,25 @@ class TestGitFunctions(unittest.TestCase):
         )
 
         # Reset git
-        reset_command = ["git", "reset", str(temporary_file_path)]
-        subprocess.run(reset_command, check=True)
+        command_result = git_functions.send_command(
+            "git", "reset", str(temporary_file_path)
+        )
 
         # Remove temporary file
         Path.unlink(temporary_file_path)
+
+    def test_send_command(self):
+
+        # Send a command in terminal
+        statement = "hello"
+        command_result = git_functions.send_command(
+            "echo", f'"{statement}"', capture_output=True, text=True
+        )
+
+        # Check the command result
+        self.assertTrue(
+            statement in command_result.stdout, "Check sending command in terminal"
+        )
 
 
 if __name__ == "__main__":
