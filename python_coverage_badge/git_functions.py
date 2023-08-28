@@ -16,8 +16,9 @@ def check_if_file_changed_using_git(file_path: Path) -> bool:
         bool: True if files have changed and False otherwise
     """
     # Run git status command
-    git_status_command = ["git", "status", str(file_path)]
-    command_result = subprocess.run(git_status_command, capture_output=True, text=True)
+    command_result = send_command(
+        "git", "status", str(file_path), capture_output=True, text=True
+    )
 
     # Check if ran ok
     if command_result.returncode == 0:  # Passing
@@ -50,55 +51,34 @@ def push_updated_readme(
     # Check if updated README changed
     if check_if_file_changed_using_git(readme_path):
 
+        # Convert file path to string
+        readme_path_str = str(readme_path)
+
         # Stage the changes (updated badge)
-        stage_file(readme_path)
+        send_command("git", "status", readme_path_str)
 
         # Check if committing and pushing
         if commit_and_push:
 
             # Commit changes
-            commit_changes(message=f"Updated coverage badge in {readme_path}")
+            commit_message = f"Updated coverage badge in {readme_path}"
+            send_command("git", "commit", "-m", commit_message)
 
             # Push changes
-            push_changes()
+            send_command("git", "push")
 
 
-def stage_file(file_path: Path):
-    """Use git to stage file
+def send_command(*args, **kwargs):
+    """Send a command in the terminal
 
-    Args:
-        file_path (Path): path to file to stage
-    """
-
-    # Build the command to stage file
-    staging_command = ["git", "add", str(file_path)]
-
-    # Run the command
-    subprocess.run(staging_command, check=True)
-
-
-def commit_changes(message: str):
-    """Use git to commit changes made
+    Uses subprocess.run(). Note by default sets check to True to
+    check if command runs without failing.
 
     Args:
-        message (str): git commit message
+        command ([str]): command to run in terminal
+        *args: additional commands to send to subprocess.run()
     """
 
-    # Build the command to commit changes
-    commit_command = ["git", "commit", "-m", message]
-
     # Run the command
-    subprocess.run(commit_command, check=True)
-
-
-def push_changes():
-    """Use git to push committed changes"""
-
-    # Build the command to push changes
-    push_command = [
-        "git",
-        "push",
-    ]
-
-    # Run the command
-    subprocess.run(push_command, check=True)
+    result = subprocess.run(args, check=True, **kwargs)
+    return result
