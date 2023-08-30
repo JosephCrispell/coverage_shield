@@ -6,7 +6,7 @@ import subprocess  # command line commands
 # Local imports
 from python_coverage_badge import (
     git_functions,
-)  # functions foir interacting with git
+)  # functions for interacting with git
 
 
 # TODO add tests
