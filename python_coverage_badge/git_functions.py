@@ -56,7 +56,7 @@ def push_updated_readme(
         readme_path_str = str(readme_path)
 
         # Stage the changes (updated badge)
-        send_command("git", "status", readme_path_str)
+        send_command("git", "add", readme_path_str)
 
         # Check if committing and pushing
         if commit_and_push:
