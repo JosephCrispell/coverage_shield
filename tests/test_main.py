@@ -14,6 +14,8 @@ class TestMain(unittest.TestCase):
         # TODO Add test in here!
         print("hello! Main test to add!")
 
+        self.assertTrue(True, "Adding empty test!")
+
 
 if __name__ == "__main__":
     unittest.main()
