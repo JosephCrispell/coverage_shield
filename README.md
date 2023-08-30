@@ -30,18 +30,19 @@ To update the coverage badge of your repo, run the following from within the **r
 python -m python_coverage_badge
 ```
 
-There are a couple of command line arguments you can use, take a look with `python -m python_coverage_badge`:
+There are a couple of command line arguments you can use, take a look with `python -m python_coverage_badge --help`:
 ```
-usage: python_coverage_badge [-h] [-d [directory]] [-r [readme_path]]
+usage: python_coverage_badge [-h] [-d [directory]] [-r [readme_path]] [-g]
 
 Welcome to python_coverage_badge! A tool to create and maintain a python package unit test coverage badge in README.md
 
 options:
-  -h, --help  show this help message and exit
+  -h, --help            show this help message and exit
   -d [directory], --directory [directory]
-              Provide path to directory to run python_coverage_badge in. (default: .)
+                        Provide path to directory to run python_coverage_badge in. (default: .)
   -r [readme_path], --readme [readme_path]
-              Provide path to README.md relative to directory provided. (default: README.md)
+                        Provide path to README.md relative to directory provided. (default: README.md)
+  -g, --git_push        Stage, commit, and push the updated README file (-r/--readme) using git. (default: False)
 ```
 
 # For Developers
@@ -59,13 +60,13 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
  ┃ ┣ 📜command_line_interface_functions.py # functions for the command line interface
  ┃ ┣ 📜git_functions.py # functions to staging, committing, and pushing updated README to remote
  ┃ ┣ 📜unittest_coverage_functions.py # functions to calculate coverage and update badge
- ┃ ┗ 📜__init__.py
+ ┃ ┗ 📜__init__.py # package structure/info
  ┣ 📂tests
  ┃ ┣ 📜test_command_line_interface_functions.py # unit tests for cli
  ┃ ┣ 📜test_git_functions.py # unit tests for git functions
  ┃ ┣ 📜test_main.py # unit tests for main script
  ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests for functions to create/update coverage badge
- ┃ ┗ 📜__init__.py
+ ┃ ┗ 📜__init__.py # package structure/info
  ┣ 📜.gitignore
  ┣ 📜.pre-commit-config.yaml # precommit workflow
  ┣ 📜LICENSE
@@ -81,7 +82,7 @@ Install python [`pre-commit`](https://pre-commit.com/) with:
 pip install pre-commit
 ```
 
-Within repository folder run:
+Within repository folder run to install hooks:
 ```bash
 pre-commit install
 ```
