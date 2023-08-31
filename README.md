@@ -16,7 +16,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add tests for main
 - TODO improve coverage of tests for git functions if possible
 
 # Installing `python_coverage_badge` 📦
