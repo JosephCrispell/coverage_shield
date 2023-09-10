@@ -110,7 +110,7 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
         # Check url
         self.assertEqual(
             badge_url,
-            f"https://img.shields.io/badge/coverage-{coverage_value}%25-{badge_colour}",
+            f"https://img.shields.io/badge/coverage-{coverage_value}%25-{badge_colour[1:]}",
             "Check expected shields io badger url produced",
         )
 
