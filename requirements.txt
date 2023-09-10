@@ -6,3 +6,4 @@ pandas
 re
 setuptools
 unittest
+seaborn
