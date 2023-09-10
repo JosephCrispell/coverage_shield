@@ -102,7 +102,7 @@ def get_badge_colour(
     """
 
     # Create colour palette
-    # Note shields io accepts hex colours
+    # Note shields io accepts hex colours (without hash!)
     # (as well as many other formats! https://shields.io/badges)
     palette = list(seaborn.color_palette(colour_palette, 100).as_hex())
 
@@ -115,20 +115,16 @@ def get_badge_colour(
 
 def make_coverage_badge_url(
     coverage_dataframe: pd.DataFrame | str,
-    poor_max_threshold: float = 25,
-    medium_max_threshold: float = 75,
     failing_colour: str = "red",
 ) -> str:
     """Uses shields io to build coverage badge
 
     Args:
         coverage_dataframe (pd.DataFrame | str): coverage report as dataframe. If coverage failed this will be string ("failing")
-        poor_max_threshold (float, optional): threshold below which badge colour is red. Defaults to 25.
-        medium_max_threshold (float, optional): threshold below which badge colour is orange. Defaults to 75.
         failing_colour (str, optional): colour of badge when failing. Defaults to "red".
 
     Returns:
-        str: _description_
+        str: shields io badge url
     """
 
     # Check if coverage report available
@@ -148,7 +144,7 @@ def make_coverage_badge_url(
         badge_colour = get_badge_colour(average_coverage)
 
         # Build badge
-        badge_url = f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}"
+        badge_url = f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour[1:]}"
 
     else:
 
