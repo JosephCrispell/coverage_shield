@@ -6,8 +6,6 @@ from python_coverage_badge import (
     command_line_interface_functions,
 )  # functions for running coverage
 
-# TODO add more colour categories to scale
-
 
 def main(arguments: list[str] = sys.argv[1:]):
 
