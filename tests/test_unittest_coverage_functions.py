@@ -1,6 +1,7 @@
 # Load packages
 import unittest  # running tests
 from pathlib import Path  # handling file paths
+import seaborn  # creating colour palette
 
 # Local imports
 from python_coverage_badge import (
@@ -101,52 +102,37 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
             coverage_dataframe
         )
 
+        # Note expected badge colour
+        palette = list(seaborn.color_palette("RdYlGn", 100).as_hex())
+        coverage_value = 81.7
+        badge_colour = palette[round(coverage_value) - 1]
+
         # Check url
         self.assertEqual(
             badge_url,
-            "https://img.shields.io/badge/coverage-81.7%25-green",
+            f"https://img.shields.io/badge/coverage-{coverage_value}%25-{badge_colour}",
             "Check expected shields io badger url produced",
         )
 
     def test_get_badge_colour(self):
         """Test that correct badger colour returned"""
 
-        # Set value thresholds
-        poor_max_threshold = 25
-        medium_max_threshold = 75
+        # Note expected badge colours
+        palette = list(seaborn.color_palette("RdYlGn", 100).as_hex())
+        coverage_values = [0, 1, 10, 50, 81.7, 99.1, 100]
+        value_colour_indices = [
+            round(value) - 1 if value >= 0.5 else 0 for value in coverage_values
+        ]
+        badge_colours = [palette[index] for index in value_colour_indices]
 
-        # Check badge is red when value lower than poor max threshold
-        self.assertEqual(
-            "red",
-            unittest_coverage_functions.get_badge_colour(
-                value=15,
-                poor_max_threshold=poor_max_threshold,
-                medium_max_threshold=medium_max_threshold,
-            ),
-            f"Badge is red when value lower than {poor_max_threshold}",
-        )
+        # Check badge colour for different values
+        for value, colour in zip(coverage_values, badge_colours):
 
-        # Check badge is orange when value more than poor max threshold but lower than medium_max_threshold
-        self.assertEqual(
-            "orange",
-            unittest_coverage_functions.get_badge_colour(
-                value=47,
-                poor_max_threshold=poor_max_threshold,
-                medium_max_threshold=medium_max_threshold,
-            ),
-            f"Badge is orange when value more than {poor_max_threshold} but lower than {medium_max_threshold}",
-        )
-
-        # Check badge is green when value more than medium max threshold
-        self.assertEqual(
-            "green",
-            unittest_coverage_functions.get_badge_colour(
-                value=85,
-                poor_max_threshold=poor_max_threshold,
-                medium_max_threshold=medium_max_threshold,
-            ),
-            f"Badge is green when value more than {medium_max_threshold}",
-        )
+            self.assertEqual(
+                colour,
+                unittest_coverage_functions.get_badge_colour(value=value),
+                f"Checking getting badge colour for value = {value} (should be {colour})",
+            )
 
 
 if __name__ == "__main__":
