@@ -9,9 +9,6 @@ from python_coverage_badge import (
 )  # functions for interacting with git
 
 
-# TODO add tests
-
-
 class TestGitFunctions(unittest.TestCase):
     def test_check_if_file_changed_using_git(self):
 

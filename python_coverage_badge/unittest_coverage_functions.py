@@ -6,6 +6,7 @@ import pandas as pd  # working with dataframes
 from pathlib import Path  # handling file paths
 import re  # working with regular expressions
 import warnings  # send warnings
+import seaborn  # create colour palette
 
 
 def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
@@ -88,53 +89,42 @@ def run_code_coverage() -> pd.DataFrame:
 
 def get_badge_colour(
     value: float,
-    poor_max_threshold: float,
-    medium_max_threshold: float,
-    poor_colour: str = "red",
-    medium_colour: str = "orange",
-    good_colour: str = "green",
+    colour_palette: str = "RdYlGn",
 ) -> str:
     """Gets coverage badger colour based on value and thresholds
 
     Args:
         value (float): coverage value
-        poor_max_threshold (float): threshold below which badge colour is poor_colour
-        medium_max_threshold (float): threshold below which badge colour is medium_colour
-        poor_colour (str, optional): colour for badge when value <= poor_max_threshold. Defaults to "red".
-        medium_colour (str, optional): colour for badge when value <= medium_max_threshold but more than poor_max_threshold. Defaults to "orange".
-        good_colour (str, optional): colour for badge when value > medium_max_threshold. Defaults to "green".
+        colour_palette (str): name of colour palette to use (see: https://holypython.com/python-visualization-tutorial/colors-with-python/)
 
     Returns:
         str: colour for badge
     """
 
-    badge_colour = None
-    if value < poor_max_threshold:
-        badge_colour = poor_colour
-    elif value < medium_max_threshold:
-        badge_colour = medium_colour
-    else:
-        badge_colour = good_colour
+    # Create colour palette
+    # Note shields io accepts hex colours (without hash!)
+    # (as well as many other formats! https://shields.io/badges)
+    palette = list(seaborn.color_palette(colour_palette, 100).as_hex())
+
+    # Get colour for value
+    value_index = round(value) - 1 if value >= 0.5 else 0
+    badge_colour = palette[value_index]
 
     return badge_colour
 
 
 def make_coverage_badge_url(
     coverage_dataframe: pd.DataFrame | str,
-    poor_max_threshold: float = 25,
-    medium_max_threshold: float = 75,
     failing_colour: str = "red",
 ) -> str:
     """Uses shields io to build coverage badge
 
     Args:
         coverage_dataframe (pd.DataFrame | str): coverage report as dataframe. If coverage failed this will be string ("failing")
-        poor_max_threshold (float, optional): threshold below which badge colour is red. Defaults to 25.
-        medium_max_threshold (float, optional): threshold below which badge colour is orange. Defaults to 75.
         failing_colour (str, optional): colour of badge when failing. Defaults to "red".
 
     Returns:
-        str: _description_
+        str: shields io badge url
     """
 
     # Check if coverage report available
@@ -151,12 +141,10 @@ def make_coverage_badge_url(
         average_coverage = round(average_coverage * 100, 1)
 
         # Note badger colour
-        badge_colour = get_badge_colour(
-            average_coverage, poor_max_threshold, medium_max_threshold
-        )
+        badge_colour = get_badge_colour(average_coverage)
 
         # Build badge
-        badge_url = f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}"
+        badge_url = f"https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour[1:]}"
 
     else:
 

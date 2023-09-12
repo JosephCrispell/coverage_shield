@@ -1,5 +1,5 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Code Coverage](https://img.shields.io/badge/coverage-83.3%25-green)
+![Code Coverage](https://img.shields.io/badge/coverage-83.5%25-4eb15d)
 
 # python_coverage_badge
 A package to create and maintain a package unit test coverage badge in python code README. Importantly there are quite a few python packages that do this task or similar:
@@ -16,8 +16,9 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
-- TODO Add tests for main
 - TODO improve coverage of tests for git functions if possible
+- TODO add patterns to ignore functionality (filter rows in coverage table)
+- TODO rename?
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
