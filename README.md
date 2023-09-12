@@ -19,6 +19,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 - TODO improve coverage of tests for git functions if possible
 - TODO add patterns to ignore functionality (filter rows in coverage table)
 - TODO rename?
+- TODO create logo
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
