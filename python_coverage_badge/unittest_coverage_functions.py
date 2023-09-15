@@ -200,9 +200,17 @@ def replace_regex_in_file(
         file.write("\n".join(file_lines) + "\n")
 
 
-def load_patterns_to_ignore_in_coverage(
-    file_path: Path = Path(".covignore"),
-) -> pd.DataFrame:
+def load_patterns_to_ignore_in_coverage(file_path: Path = Path(".covignore")) -> [str]:
+    """Loads patterns from simple text file lines into list
+
+    Note file is like .gitignore so each line represents a pattern to ignore. Commented lines
+    can start with hash (#) and empty lines are ignored.
+    Args:
+        file_path (Path): path to file containing patterns
+
+    Returns:
+        [list] : list of patterns to ignore
+    """
 
     # Check if file exists
     if file_path.is_file():
@@ -212,8 +220,10 @@ def load_patterns_to_ignore_in_coverage(
         with open(file_path) as file:
             file_lines = file.read().splitlines()
 
-        # Ignore comment lines
-        file_lines = [line for line in file_lines if not line.startswith("#")]
+        # Ignore comment or empty lines
+        file_lines = [
+            line for line in file_lines if not line.startswith("#") or not line == ""
+        ]
 
         return file_lines
 
