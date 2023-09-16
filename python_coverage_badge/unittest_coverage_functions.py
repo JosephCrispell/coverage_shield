@@ -225,6 +225,9 @@ def load_patterns_to_ignore_in_coverage(file_path: Path = Path(".covignore")) ->
             line for line in file_lines if not line.startswith("#") or not line == ""
         ]
 
+        # Check if no lines present
+        file_lines = None if len(file_lines) == 0 else file_lines
+
         return file_lines
 
     else:
