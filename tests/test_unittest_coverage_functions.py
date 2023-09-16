@@ -134,6 +134,8 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
                 f"Checking getting badge colour for value = {value} (should be {colour})",
             )
 
+    # TODO add test for load_patterns_to_ignore_in_coverage()
+
 
 if __name__ == "__main__":
     unittest.main()
