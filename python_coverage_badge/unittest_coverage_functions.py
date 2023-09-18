@@ -221,9 +221,10 @@ def load_patterns_to_ignore_in_coverage(file_path: Path = Path(".covignore")) ->
             file_lines = file.read().splitlines()
 
         # Ignore comment or empty lines
-        file_lines = [
-            line for line in file_lines if not line.startswith("#") or not line == ""
-        ]
+        file_lines = [line for line in file_lines if not line.startswith("#")]
+
+        # Remove empty values
+        file_lines = list(filter(None, file_lines))
 
         # Check if no lines present
         file_lines = None if len(file_lines) == 0 else file_lines
