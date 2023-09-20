@@ -47,6 +47,17 @@ options:
   -g, --git_push        Stage, commit, and push the updated README file (-r/--readme) using git. (default: False)
 ```
 
+# Ignoring patterns
+
+If you'd like to ignore the unit test coverage for particular files in your coverage report you can created a `.covignore` file in your repository directory. For example, here's the content of the `.covignore` file for this project:
+
+```
+setup.py
+__init__.py
+```
+
+The `.covignore` works in a similar way to a `.gitignore` file and any pattern found in it is passed to the [`str.contains()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html) function and used to filter the unit test coverage report before calculate the average coverage for the project. So the above means that any `setup.py` or `__init__.py` files are ignored.
+
 # For Developers
 
 ## Installation for development
@@ -69,6 +80,7 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
  ┃ ┣ 📜test_main.py # unit tests for main script
  ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests for functions to create/update coverage badge
  ┃ ┗ 📜__init__.py # package structure/info
+ ┣ 📜.covignore # patterns/files to ignore when calculating coverage
  ┣ 📜.gitignore
  ┣ 📜.pre-commit-config.yaml # precommit workflow
  ┣ 📜LICENSE
