@@ -18,7 +18,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 - TODO improve coverage of tests for git functions if possible
 - TODO update README with ignore patterns info
-- TODO rename?
+- TODO rename? shield_badger 🦡
 - TODO create logo
 
 # Installing `python_coverage_badge` 📦
