@@ -1,5 +1,5 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Code Coverage](https://img.shields.io/badge/coverage-83.5%25-4eb15d)
+![Code Coverage](https://img.shields.io/badge/coverage-84.4%25-4eb15d)
 
 # python_coverage_badge
 A package to create and maintain a package unit test coverage badge in python code README. Importantly there are quite a few python packages that do this task or similar:
@@ -17,8 +17,8 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 # Tasks
 
 - TODO improve coverage of tests for git functions if possible
-- TODO add patterns to ignore functionality (filter rows in coverage table)
-- TODO rename?
+- TODO rename? shield_badger 🦡
+- TODO create logo
 
 # Installing `python_coverage_badge` 📦
 To install this package, follow these two steps:
@@ -46,6 +46,17 @@ options:
   -g, --git_push        Stage, commit, and push the updated README file (-r/--readme) using git. (default: False)
 ```
 
+# Ignoring patterns
+
+If you'd like to ignore the unit test coverage for particular files in your coverage report you can created a `.covignore` file in your repository directory. For example, here's the content of the `.covignore` file for this project:
+
+```
+setup.py
+__init__.py
+```
+
+The `.covignore` works in a similar way to a `.gitignore` file and any pattern found in it is passed to the [`str.contains()`](https://pandas.pydata.org/docs/reference/api/pandas.Series.str.contains.html) function and used to filter the unit test coverage report before calculate the average coverage for the project. So the above means that any `setup.py` or `__init__.py` files are ignored.
+
 # For Developers
 
 ## Installation for development
@@ -68,6 +79,7 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
  ┃ ┣ 📜test_main.py # unit tests for main script
  ┃ ┣ 📜test_unittest_coverage_functions.py # unit tests for functions to create/update coverage badge
  ┃ ┗ 📜__init__.py # package structure/info
+ ┣ 📜.covignore # patterns/files to ignore when calculating coverage
  ┣ 📜.gitignore
  ┣ 📜.pre-commit-config.yaml # precommit workflow
  ┣ 📜LICENSE

@@ -38,7 +38,6 @@ def check_if_file_changed_using_git(file_path: Path) -> bool:
     return True
 
 
-# TODO run python -m python_coverage_badge --git_push to test
 def push_updated_readme(
     readme_path: Path = Path("README.md"), commit_and_push: bool = True
 ):

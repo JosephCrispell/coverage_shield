@@ -9,7 +9,9 @@ import warnings  # send warnings
 import seaborn  # create colour palette
 
 
-def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
+def parse_coverage_report(
+    coverage_report_string: str, patterns_to_ignore: [str] = None
+) -> pd.DataFrame:
     """Parses byte string returned by coverage report into pandas dataframe
 
     Args:
@@ -28,6 +30,13 @@ def parse_coverage_report(coverage_report_string: str) -> pd.DataFrame:
 
     # Remove percent sign from coverage column and convert to float
     coverage_dataframe.Cover = coverage_dataframe.Cover.str[:-1].astype(float)
+
+    # Check if any patterns to ignore
+    if not patterns_to_ignore == None:
+        patterns_to_ignore = "|".join(patterns_to_ignore)
+        coverage_dataframe = coverage_dataframe[
+            ~coverage_dataframe.Name.str.contains(patterns_to_ignore)
+        ]
 
     return coverage_dataframe
 
@@ -74,8 +83,11 @@ def run_code_coverage() -> pd.DataFrame:
                 f"Generating coverage report command ({' '.join(report_command)}) failed! Return code: {error.returncode}"
             )
 
+        # Get patterns to ignore
+        patterns_to_ignore = load_patterns_to_ignore_in_coverage()
+
         # Convert coverage report output to dataframe
-        report_dataframe = parse_coverage_report(coverage_report)
+        report_dataframe = parse_coverage_report(coverage_report, patterns_to_ignore)
 
     else:
         warnings.warn(
@@ -186,3 +198,38 @@ def replace_regex_in_file(
     # Write file lines back to file
     with open(file_path, "w") as file:
         file.write("\n".join(file_lines) + "\n")
+
+
+def load_patterns_to_ignore_in_coverage(file_path: Path = Path(".covignore")) -> [str]:
+    """Loads patterns from simple text file lines into list
+
+    Note file is like .gitignore so each line represents a pattern to ignore. Commented lines
+    can start with hash (#) and empty lines are ignored.
+    Args:
+        file_path (Path): path to file containing patterns
+
+    Returns:
+        [list] : list of patterns to ignore
+    """
+
+    # Check if file exists
+    if file_path.is_file():
+
+        # Get the file lines from the file
+        file_lines = []
+        with open(file_path) as file:
+            file_lines = file.read().splitlines()
+
+        # Ignore comment or empty lines
+        file_lines = [line for line in file_lines if not line.startswith("#")]
+
+        # Remove empty values
+        file_lines = list(filter(None, file_lines))
+
+        # Check if no lines present
+        file_lines = None if len(file_lines) == 0 else file_lines
+
+        return file_lines
+
+    else:
+        return None

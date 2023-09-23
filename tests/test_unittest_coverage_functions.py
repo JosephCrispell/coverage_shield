@@ -134,6 +134,53 @@ class TestUnittestCoverageFunctions(unittest.TestCase):
                 f"Checking getting badge colour for value = {value} (should be {colour})",
             )
 
+    def test_load_patterns_to_ignore_in_coverage(self):
+
+        # Create temporary file
+        temporary_file_path = Path("test.covignore")
+        file_lines = [
+            "ignore",
+            "\n",
+            "# Ignore this comment",
+            "\n",
+            "this",
+            "\n",
+            "pattern",
+            "\n",
+        ]
+        with open(temporary_file_path, "w") as file:
+            file.write("\n".join(file_lines))
+
+        # Load the patterns from temp file
+        patterns = unittest_coverage_functions.load_patterns_to_ignore_in_coverage(
+            file_path=temporary_file_path
+        )
+
+        # Check patterns loaded correctly
+        self.assertEqual(
+            patterns[0],
+            "ignore",
+            "Check pattern read in",
+        )
+        self.assertEqual(
+            patterns[1],
+            "this",
+            "Check pattern read in",
+        )
+        self.assertEqual(
+            patterns[2],
+            "pattern",
+            "Check pattern read in",
+        )
+        self.assertEqual(
+            len(patterns),
+            3,
+            "Check correct number of patterns loaded",
+        )
+
+        # Remove temporary file
+        Path.unlink(temporary_file_path)
+
 
 if __name__ == "__main__":
     unittest.main()
