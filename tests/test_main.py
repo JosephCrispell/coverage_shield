@@ -3,7 +3,7 @@ import unittest  # running tests
 from pathlib import Path  # handling file paths
 
 # Local imports
-from python_coverage_badge import (
+from coverage_shield import (
     __main__,
 )  # functions for running coverage
 

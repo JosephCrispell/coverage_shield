@@ -6,12 +6,12 @@ import sys  # accessing command line arguments
 import os  # Change directory
 
 # Local imports
-from python_coverage_badge import unittest_coverage_functions
-from python_coverage_badge import git_functions
+from coverage_shield import unittest_coverage_functions
+from coverage_shield import git_functions
 
 
 def build_command_line_interface() -> argparse.ArgumentParser:
-    """Builds command line interface for python_coverage_badge package
+    """Builds command line interface for coverage_shield package
 
     Adds the following arguments:
     - Target directory: -d/--directory
@@ -23,11 +23,11 @@ def build_command_line_interface() -> argparse.ArgumentParser:
     """
 
     # Write welcome message
-    welcome_message = "Welcome to python_coverage_badge! A tool to create and maintain a python package unit test coverage badge in README.md"
+    welcome_message = "Welcome to coverage_shield! A tool to create and maintain a python package unit test coverage badge in README.md"
 
     # Initialize parser
     parser = argparse.ArgumentParser(
-        prog="python_coverage_badge",
+        prog="coverage_shield",
         description=welcome_message,
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,  # Shows default values for parameters
     )
@@ -40,7 +40,7 @@ def build_command_line_interface() -> argparse.ArgumentParser:
         default=".",  # Default value
         metavar="directory",
         type=str,
-        help="Provide path to directory to run python_coverage_badge in.",
+        help="Provide path to directory to run coverage_shield in.",
     )
     parser.add_argument(
         "-r",

@@ -4,7 +4,7 @@ from pathlib import Path  # handling file paths
 import subprocess  # command line commands
 
 # Local imports
-from python_coverage_badge import (
+from coverage_shield import (
     git_functions,
 )  # functions for interacting with git
 

@@ -1,12 +1,12 @@
 from setuptools import setup
 
-from python_coverage_badge import __version__
+from coverage_shield import __version__
 
 setup(
-    name="python_coverage_badge",
+    name="coverage_shield",
     version=__version__,
-    url="https://github.com/JosephCrispell/python_coverage_badge",
+    url="https://github.com/JosephCrispell/coverage_shield",
     author="Joseph Crispell",
     author_email="test@mail.com",
-    py_modules=["python_coverage_badge"],
+    py_modules=["coverage_shield"],
 )

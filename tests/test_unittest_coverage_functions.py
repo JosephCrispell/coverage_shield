@@ -4,7 +4,7 @@ from pathlib import Path  # handling file paths
 import seaborn  # creating colour palette
 
 # Local imports
-from python_coverage_badge import (
+from coverage_shield import (
     unittest_coverage_functions,
 )  # functions for running coverage
 

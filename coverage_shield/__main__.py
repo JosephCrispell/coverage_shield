@@ -2,7 +2,7 @@
 import sys  # accessing command line arguments
 
 # Local imports
-from python_coverage_badge import (
+from coverage_shield import (
     command_line_interface_functions,
 )  # functions for running coverage
 

@@ -3,7 +3,7 @@ import unittest  # running tests
 from pathlib import Path  # handling file paths
 
 # Local imports
-from python_coverage_badge import command_line_interface_functions  # cli functions
+from coverage_shield import command_line_interface_functions  # cli functions
 
 
 class TestCommandLineInterfaceFunctions(unittest.TestCase):
