@@ -18,6 +18,7 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 - TODO improve coverage of tests for git functions if possible
 - TODO create logo
+- TODO add github action to build and test on different OSs
 
 # Installing `coverage_shield` 📦
 To install this package, follow these two steps:
