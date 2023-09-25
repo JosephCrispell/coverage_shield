@@ -17,7 +17,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 # Tasks
 
 - TODO improve coverage of tests for git functions if possible
-- TODO rename? shield_badger 🦡
 - TODO create logo
 
 # Installing `coverage_shield` 📦
