@@ -1,6 +1,8 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Code Coverage](https://img.shields.io/badge/coverage-84.4%25-4eb15d)
 
+<img src="images/logo.svg" alt="timesheet logo" align="right" width="15%">
+
 # coverage_shield
 A package to create and maintain a package unit test coverage badge in python code README. Importantly there are quite a few python packages that do this task or similar:
 - [`genbadge`](https://smarie.github.io/python-genbadge/) - generates badges (as images) for a range of python tools including a coverage one
@@ -73,6 +75,8 @@ Directory tree generated using [file-tree-generator](https://marketplace.visuals
  ┃ ┣ 📜git_functions.py # functions to staging, committing, and pushing updated README to remote
  ┃ ┣ 📜unittest_coverage_functions.py # functions to calculate coverage and update badge
  ┃ ┗ 📜__init__.py # package structure/info
+ ┣ 📂images
+ ┃ ┗ 📜logo.svg
  ┣ 📂tests
  ┃ ┣ 📜test_command_line_interface_functions.py # unit tests for cli
  ┃ ┣ 📜test_git_functions.py # unit tests for git functions
