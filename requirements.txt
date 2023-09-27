@@ -1,7 +1,6 @@
 pre-commit
 pathlib
 subprocess.run
-io
 pandas
 re
 setuptools
