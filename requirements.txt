@@ -1,9 +1,7 @@
 pre-commit
 pathlib
-subprocess
-io
+subprocess.run
 pandas
-re
 setuptools
-unittest
 seaborn
+coverage
