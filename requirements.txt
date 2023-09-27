@@ -3,5 +3,4 @@ pathlib
 subprocess.run
 pandas
 setuptools
-unittest
 seaborn
