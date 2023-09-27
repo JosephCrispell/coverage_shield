@@ -1,6 +1,6 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Code Coverage](https://img.shields.io/badge/coverage-84.4%25-4eb15d)
-[![Python package build](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml/badge.svg)](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml)
+[![Python package](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml/badge.svg)](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml)
 
 <img src="images/logo.svg" alt="timesheet logo" align="right" width="15%">
 
@@ -20,7 +20,6 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 # Tasks
 
 - TODO improve coverage of tests for git functions if possible
-- TODO add github action to build and test on different OSs
 
 # Installing `coverage_shield` 📦
 To install this package, follow these two steps:
