@@ -1,6 +1,6 @@
 pre-commit
 pathlib
-subprocess
+subprocess.run
 io
 pandas
 re
