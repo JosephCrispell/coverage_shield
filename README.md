@@ -19,6 +19,8 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
+- TODO create a release
+- TODO look into getting published on pip
 - TODO improve coverage of tests for git functions if possible
 
 # Installing `coverage_shield` 📦
