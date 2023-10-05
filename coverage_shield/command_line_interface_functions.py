@@ -52,6 +52,15 @@ def build_command_line_interface() -> argparse.ArgumentParser:
         help="Provide path to README.md relative to directory provided.",
     )
     parser.add_argument(
+        "-t",
+        "--tester",
+        nargs="?",  # Accept 0 or 1 arguments
+        default="unittest",  # Default value
+        metavar="tester",
+        type=str,
+        help="Provide name of unit test python package you want to use. Accepts either \"unittest\" or \"pytest\"",
+    )
+    parser.add_argument(
         "-g",
         "--git_push",
         action="store_true",
@@ -86,8 +95,8 @@ def parse_command_line_arguments(
         # Set target directory
         os.chdir(args.directory)
 
-        # Run coverage package (which runs unittests and generates report
-        coverage_dataframe = unittest_coverage_functions.run_code_coverage()
+        # Run coverage package (which runs unit tests and generates report)
+        coverage_dataframe = unittest_coverage_functions.run_code_coverage(args.tester)
 
         # Build the badge url
         coverage_badge_url = unittest_coverage_functions.make_coverage_badge_url(
