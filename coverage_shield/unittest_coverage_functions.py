@@ -41,7 +41,7 @@ def parse_coverage_report(
     return coverage_dataframe
 
 
-def run_code_coverage() -> pd.DataFrame:
+def run_code_coverage(tester: str = "unittest") -> pd.DataFrame:
     """Runs coverage tool in command line and returns report
 
     Will send warning if running coverage package is failing and return empty dataframe
@@ -50,7 +50,10 @@ def run_code_coverage() -> pd.DataFrame:
         pd.DataFrame : coverage report as dataframe if coverage passing; empty dataframe if coverage failing
     """
 
-    # Change to the directory provided
+    # Check tester option provided
+    tester_options = ["unittest", "pytest"]
+    if not tester in tester_options:
+        raise ValueError(f"The tester option provided ({tester}) was not recognised. Must be one of: {tester_options.join(', ')}")
 
     # Run code coverage calculation
     # Check out useful subprocess function docs: https://www.datacamp.com/tutorial/python-subprocess
@@ -61,7 +64,7 @@ def run_code_coverage() -> pd.DataFrame:
         "run",
         "--source=.",
         "-m",
-        "unittest",
+        tester,
     ]
     command_result = subprocess.run(coverage_command, capture_output=True, text=True)
 
