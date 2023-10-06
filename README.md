@@ -34,9 +34,9 @@ To update the coverage badge of your repo, run the following from within the **r
 python -m coverage_shield
 ```
 
-There are a couple of command line arguments you can use, take a look with `python -m coverage_shield --help`:
+There are a few command line arguments you can use, take a look with `python -m coverage_shield --help`:
 ```
-usage: coverage_shield [-h] [-d [directory]] [-r [readme_path]] [-g]
+usage: coverage_shield [-h] [-d [directory]] [-r [readme_path]] [-t [tester]] [-g]
 
 Welcome to coverage_shield! A tool to create and maintain a python package unit test coverage badge in README.md
 
@@ -46,6 +46,8 @@ options:
                         Provide path to directory to run coverage_shield in. (default: .)
   -r [readme_path], --readme [readme_path]
                         Provide path to README.md relative to directory provided. (default: README.md)
+  -t [tester], --tester [tester]
+                        Provide name of unit test python package you want to use. Accepts either "unittest" or "pytest" (default: unittest)
   -g, --git_push        Stage, commit, and push the updated README file (-r/--readme) using git. (default: False)
 ```
 
