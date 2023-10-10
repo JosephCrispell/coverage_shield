@@ -1,6 +1,6 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![Code Coverage](https://img.shields.io/badge/coverage-83.4%25-54b45f)
-[![Python package](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml/badge.svg)](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package.yml)
+[![Python package](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package-build.yml/badge.svg)](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package-build.yml)
 
 <img src="images/logo.svg" alt="timesheet logo" align="right" width="15%">
 
