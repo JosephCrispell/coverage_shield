@@ -1,5 +1,5 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Code Coverage](https://img.shields.io/badge/coverage-84.4%25-4eb15d)
+![Code Coverage](https://img.shields.io/badge/coverage-83.4%25-54b45f)
 [![Python package](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package-build.yml/badge.svg)](https://github.com/JosephCrispell/coverage_shield/actions/workflows/python-package-build.yml)
 
 <img src="images/logo.svg" alt="timesheet logo" align="right" width="15%">
@@ -19,6 +19,8 @@ https://img.shields.io/badge/coverage-{average_coverage}%25-{badge_colour}
 
 # Tasks
 
+- TODO create a release
+- TODO look into getting published on pip
 - TODO improve coverage of tests for git functions if possible
 
 # Installing `coverage_shield` 📦
@@ -32,9 +34,9 @@ To update the coverage badge of your repo, run the following from within the **r
 python -m coverage_shield
 ```
 
-There are a couple of command line arguments you can use, take a look with `python -m coverage_shield --help`:
+There are a few command line arguments you can use, take a look with `python -m coverage_shield --help`:
 ```
-usage: coverage_shield [-h] [-d [directory]] [-r [readme_path]] [-g]
+usage: coverage_shield [-h] [-d [directory]] [-r [readme_path]] [-t [tester]] [-g]
 
 Welcome to coverage_shield! A tool to create and maintain a python package unit test coverage badge in README.md
 
@@ -44,6 +46,8 @@ options:
                         Provide path to directory to run coverage_shield in. (default: .)
   -r [readme_path], --readme [readme_path]
                         Provide path to README.md relative to directory provided. (default: README.md)
+  -t [tester], --tester [tester]
+                        Provide name of unit test python package you want to use. Accepts either "unittest" or "pytest" (default: unittest)
   -g, --git_push        Stage, commit, and push the updated README file (-r/--readme) using git. (default: False)
 ```
 
